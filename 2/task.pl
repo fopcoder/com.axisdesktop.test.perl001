@@ -45,10 +45,10 @@ sub diff	{
 	
 	my %h = ();
 	
-	@h{ @$arr1 } = undef;
-	delete @h{ @$arr2 };
-	
-	return [ keys %h ];
+	@h{ @$arr2 } = undef;
+	my @res = map { exists $h{ $_ } ? () : $_ } @$arr1;
+
+	return \@res;
 }
 
 

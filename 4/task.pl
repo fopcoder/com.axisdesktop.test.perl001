@@ -3,6 +3,7 @@
 use strict;
 
 my $n = 20;
+my $c = 0;
 
 for my $i (1 .. $n) {
 	my $pid = fork();
@@ -16,13 +17,14 @@ for my $i (1 .. $n) {
 		warn "fork $$ ($pid)";
 	}
 	else	{
+		$c++;
 		warn "request -> child $i";
 		sleep 2; # $ua->request
 		exit;	
 	}
 }
 
-for( 1 .. $n ) {
+for( 1 .. $c ) {
 	wait();
 }
 
